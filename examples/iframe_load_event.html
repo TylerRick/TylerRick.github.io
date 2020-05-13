@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<body>
+  <div>
+    <script type="text/javascript">
+      // This is a response to https://stackoverflow.com/questions/6183737/dynamically-create-an-iframe-and-attach-onload-event-to-it
+      iframe = document.createElement('iframe')
+      //iframe.setAttribute('src', 'https://example.com/')
+      var src = `
+        <html>
+          <head>
+            <link type="text/css" rel="stylesheet" href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css">
+          </head>
+          <body></body>
+        </html>
+      `
+
+      document.getElementsByTagName('body')[0].appendChild(iframe)
+      const onLoaded = function() {
+        console.log('iframe loaded');
+      }
+      if (iframe.contentWindow.document.readyState === 'complete') {
+        console.log('already loaded')
+        onLoaded()
+      } else {
+        iframe.contentWindow.addEventListener('load', onLoaded)
+      }
+    </script>
+  </div>
+</body>
+
+</html>
+
